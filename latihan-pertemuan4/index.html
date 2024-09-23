@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Registrasi</title>
+    <style>
+        body {
+            background-color: lightblue;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="firstname">Firstname:</label>
+        <input type="text" id="firstname" name="firstname"><br><br>
+
+        <label for="middlename">Middlename:</label>
+        <input type="text" id="middlename" name="middlename"><br><br>
+
+        <label for="lastname">Lastname:</label>
+        <input type="text" id="lastname" name="lastname"><br><br>
+
+        <label for="course">Course:</label>
+        <select id="course" name="course">
+            <option value="course">Pemrograman Web</option>
+            <option value="course">Jaringan Komputer</option>
+            </select><br><br>
+
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+        <input type="radio" name="gender" value="other"> Other<br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" value="+62"><br><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address"></textarea><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+
+        <label for="repassword">Re-type password:</label>
+        <input type="password" id="repassword" name="repassword"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html> 
