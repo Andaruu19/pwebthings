@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Registrasi</title>
+    <style>
+      body {
+        background-color: whitesmoke;
+        font-family: Arial, sans-serif;
+      }
+      form {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: white;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="registrationForm">
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required />
+      <span id="namaError" class="error"></span><br /><br />
+
+      <label for="notelp">Nomor Telepon:</label>
+      <input type="tel" id="phone" name="phone" required pattern="\d+" />
+      <span id="phoneError" class="error"></span><br /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <span id="emailError" class="error"></span><br /><br />
+
+      <label for="pesan">Pesan:</label>
+      <input type="text" id="pesan" name="pesan" required />
+      <span id="pesanError" class="error"></span><br /><br />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+      function validateForm() {
+        var nama = document.getElementById("nama").value;
+        var phone = document.getElementById("phone").value;
+        var email = document.getElementById("email").value;
+        var pesan = document.getElementById("pesan").value;
+
+        var namaError = document.getElementById("namaError");
+        var phoneError = document.getElementById("phoneError");
+        var emailError = document.getElementById("emailError");
+        var pesanError = document.getElementById("pesanError");
+
+        var isValid = true;
+
+        if (nama === "") {
+          namaError.textContent = "Nama harus diisi";
+          isValid = false;
+        } else {
+          namaError.textContent = "";
+        }
+
+        if (phone === "") {
+          phoneError.textContent = "Nomor telepon harus diisi";
+          isValid = false;
+        } else {
+          phoneError.textContent = "";
+        }
+
+        if (email === "") {
+          emailError.textContent = "Email harus diisi";
+          isValid = false;
+        } else if (!isValidEmail(email)) {
+          emailError.textContent = "Email tidak valid";
+          isValid = false;
+        } else {
+          emailError.textContent = "";
+        }
+
+        if (pesan === "") {
+          pesanError.textContent = "Pesan harus diisi";
+          isValid = false;
+        } else {
+          pesanError.textContent = "";
+        }
+
+        return isValid;
+      }
+
+      function isValidEmail(email) {
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (event) {
+          if (!validateForm()) {
+            event.preventDefault();
+          }
+        });
+    </script>
+  </body>
+</html>
