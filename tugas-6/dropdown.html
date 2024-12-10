@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown Dinamis</title>
+  </head>
+  <body>
+    <h2>Dropdown Dinamis</h2>
+    <div>
+      <label for="category">Category:</label>
+      <select id="category" onchange="updateSubcategory()">
+        <option value="">Select Category</option>
+        <option value="fruits">Fruits</option>
+        <option value="vegetables">Vegetables</option>
+      </select>
+    </div>
+    <div>
+      <label for="subcategory">Subcategory:</label>
+      <select id="subcategory">
+        <option value="">Select Subcategory</option>
+      </select>
+    </div>
+
+    <script>
+      const subcategories = {
+        fruits: ["Apple", "Banana", "Orange"],
+        vegetables: ["Carrot", "Spinach", "Potato"],
+      };
+
+      function updateSubcategory() {
+        const category = document.getElementById("category").value;
+        const subcategory = document.getElementById("subcategory");
+        subcategory.innerHTML = `<option value="">Select Subcategory</option>`;
+        if (subcategories[category]) {
+          subcategories[category].forEach((sub) => {
+            subcategory.innerHTML += `<option value="${sub.toLowerCase()}">${sub}</option>`;
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

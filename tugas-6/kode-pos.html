@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cari Kode Pos</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      select,
+      button {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Cari Kode Pos</h2>
+    <form onsubmit="return false;">
+      <div class="form-group">
+        <label for="provinsi">Provinsi</label>
+        <select id="provinsi" onchange="updateKabupaten()">
+          <option value="">Pilih Provinsi</option>
+          <option value="Jawa Tengah">Jawa Tengah</option>
+          <option value="Jawa Barat">Jawa Barat</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="kabupaten">Kabupaten/Kota</label>
+        <select id="kabupaten" onchange="updateKecamatan()">
+          <option value="">Pilih Kabupaten/Kota</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="kecamatan">Kecamatan</label>
+        <select id="kecamatan" onchange="showKodePos()">
+          <option value="">Pilih Kecamatan</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Kode Pos</label>
+        <p id="kode-pos">-</p>
+      </div>
+    </form>
+
+    <script>
+      const data = {
+        "Jawa Tengah": {
+          Semarang: { Banyumanik: "50263", Tembalang: "50275" },
+          Solo: { Laweyan: "57148", Banjarsari: "57147" },
+        },
+        "Jawa Barat": {
+          Bandung: { Cibiru: "40612", Cimahi: "40511" },
+          Bogor: { Cibinong: "16914", Dramaga: "16680" },
+        },
+      };
+
+      function updateKabupaten() {
+        const provinsi = document.getElementById("provinsi").value;
+        const kabupaten = document.getElementById("kabupaten");
+        kabupaten.innerHTML = `<option value="">Pilih Kabupaten/Kota</option>`;
+        if (data[provinsi]) {
+          Object.keys(data[provinsi]).forEach((kab) => {
+            kabupaten.innerHTML += `<option value="${kab}">${kab}</option>`;
+          });
+        }
+        document.getElementById(
+          "kecamatan"
+        ).innerHTML = `<option value="">Pilih Kecamatan</option>`;
+        document.getElementById("kode-pos").textContent = "-";
+      }
+
+      function updateKecamatan() {
+        const provinsi = document.getElementById("provinsi").value;
+        const kabupaten = document.getElementById("kabupaten").value;
+        const kecamatan = document.getElementById("kecamatan");
+        kecamatan.innerHTML = `<option value="">Pilih Kecamatan</option>`;
+        if (data[provinsi] && data[provinsi][kabupaten]) {
+          Object.keys(data[provinsi][kabupaten]).forEach((kec) => {
+            kecamatan.innerHTML += `<option value="${kec}">${kec}</option>`;
+          });
+        }
+        document.getElementById("kode-pos").textContent = "-";
+      }
+
+      function showKodePos() {
+        const provinsi = document.getElementById("provinsi").value;
+        const kabupaten = document.getElementById("kabupaten").value;
+        const kecamatan = document.getElementById("kecamatan").value;
+        const kodePos = data[provinsi]?.[kabupaten]?.[kecamatan] || "-";
+        document.getElementById("kode-pos").textContent = kodePos;
+      }
+    </script>
+  </body>
+</html>

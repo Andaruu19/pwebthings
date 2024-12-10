@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Registrasi</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+      }
+      .suggestions {
+        border: 1px solid #ccc;
+        max-height: 100px;
+        overflow-y: auto;
+        background: #fff;
+        position: absolute;
+      }
+      .suggestions div {
+        padding: 8px;
+        cursor: pointer;
+      }
+      .suggestions div:hover {
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Form Registrasi</h2>
+    <form>
+      <div class="form-group">
+        <label for="nama">Nama Mahasiswa</label>
+        <input
+          type="text"
+          id="nama"
+          oninput="showSuggestions()"
+          autocomplete="off"
+        />
+        <div class="suggestions" id="nama-suggestions"></div>
+      </div>
+      <div class="form-group">
+        <label for="nim">NIM</label>
+        <input type="text" id="nim" />
+      </div>
+      <div class="form-group">
+        <label for="mata-kuliah">Mata Kuliah</label>
+        <input type="text" id="mata-kuliah" />
+      </div>
+      <div class="form-group">
+        <label for="dosen">Dosen</label>
+        <input type="text" id="dosen" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      const suggestions = [
+        "Ahmad",
+        "Aisyah",
+        "Budi",
+        "Chandra",
+        "Dewi",
+        "Eka",
+        "Fajar",
+        "Gilang",
+      ];
+      const input = document.getElementById("nama");
+      const suggestionsBox = document.getElementById("nama-suggestions");
+
+      function showSuggestions() {
+        const query = input.value.toLowerCase();
+        suggestionsBox.innerHTML = "";
+        if (query) {
+          suggestions
+            .filter((name) => name.toLowerCase().includes(query))
+            .forEach((name) => {
+              const div = document.createElement("div");
+              div.textContent = name;
+              div.onclick = () => {
+                input.value = name;
+                suggestionsBox.innerHTML = "";
+              };
+              suggestionsBox.appendChild(div);
+            });
+        }
+      }
+    </script>
+  </body>
+</html>
