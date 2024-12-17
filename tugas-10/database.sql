@@ -1,0 +1,10 @@
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE
+);
+INSERT INTO roles (role_name) VALUES ('Admin'), ('User'), ('Moderator');
+ALTER TABLE users ADD COLUMN role_id INT NOT NULL DEFAULT 2;
+ALTER TABLE users
+ADD CONSTRAINT fk_role
+FOREIGN KEY (role_id) REFERENCES roles(id)
+ON DELETE CASCADE ON UPDATE CASCADE;
